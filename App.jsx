@@ -1,49 +1,114 @@
-import React from 'react';
-import {ScrollView, StyleSheet,  Text, View, Image, ImageBackground, TextInput, Pressable} from 'react-native';
-import {Element3, Receipt21, Clock, Message, SearchNormal} from 'iconsax-react-native';
-import { fontType, colors } from './src/theme';
+import React, { useState } from 'react';
+import {ScrollView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native';
+import {Filter, SearchNormal} from 'iconsax-react-native';
+import { colors } from './src/theme';
 
 export default function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <View style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>WOCO.</Text>
-        <Element3 color={colors.black()} variant="Linear" size={24} />
+        <Text style={styles.title}>KueKu</Text>
+        <Filter color={colors.white()} size={24} />
       </View>
-<View style={searchBar.container}>
+
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <SearchNormal size={20} color={colors.blue()} style={styles.searchIcon} />
         <TextInput
-            style={searchBar.input}
-            placeholder="Search"
-          />
-          <Pressable style={searchBar.button}>
-            <SearchNormal size={20} color={colors.white()} />
-          </Pressable>
+          style={styles.searchInput}
+          placeholder="Cari resep"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+        {searchQuery ? (
+          <TouchableOpacity onPress={() => setSearchQuery('')}>
+            <Text style={styles.clearButton}>×</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
-      <View style={styles.listCategory}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={{...category.item, marginLeft: 24}}>
-            <Text style={{...category.title, color: colors.blue()}}>
-              Popular
-            </Text>
-          </View>
-          <View style={category.item}>
-            <Text style={category.title}>Latest</Text>
-          </View>
-          <View style={category.item}>
-            <Text style={category.title}>Technology</Text>
-          </View>
-          <View style={category.item}>
-            <Text style={category.title}>Fashion</Text>
-          </View>
-          <View style={category.item}>
-            <Text style={category.title}>Health</Text>
-          </View>
-          <View style={{...category.item, marginRight: 24}}>
-            <Text style={category.title}>Lifestyle</Text>
-          </View>
+
+      {/* Popular Recipes */}
+      <View style={styles.popularRecipesContainer}>
+        <Text style={styles.sectionTitle}>Resep Kue populer</Text>
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.popularRecipesScroll}
+        >
+          {[
+            {id: 1, title: 'Kue Brownis', image: 'https://sugargeekshow.com/wp-content/uploads/2019/10/fudgy_brownie_recipe_featured.jpg'},
+            {id: 2, title: 'Kue Donat', image: 'https://3.bp.blogspot.com/-HKFupKHeDq0/VBJ92YWNJ8I/AAAAAAAAASM/aZ3uILhgW-Q/s1600/Kue%2BDonat.jpg'},
+            {id: 3, title: 'Kue Nastar', image: 'https://d12man5gwydfvl.cloudfront.net/wp-content/uploads/2019/02/Resep-Kue-Nastar-1.jpg'},
+          ].map((recipe) => (
+            <View key={recipe.id} style={styles.popularRecipeItem}>
+              <Image 
+                source={{uri: recipe.image}} 
+                style={styles.popularRecipeImage} 
+                defaultSource={{uri: 'https://via.placeholder.com/100'}}
+              />
+              <Text style={styles.popularRecipeTitle}>{recipe.title}</Text>
+            </View>
+          ))}
         </ScrollView>
       </View>
-      <ListBlog />
+
+      {/* Latest Recipes */}
+      <View style={styles.latestRecipesContainer}>
+        <Text style={styles.sectionTitle}>Resep terbaru (985797)</Text>
+        <ScrollView>
+          {[
+            {
+              title: 'Kue Brownis',
+              description: 'daging ayam filet, telur rebus, serai, daun jeruk...',
+              author: 'Erlina',
+              image: 'https://sugargeekshow.com/wp-content/uploads/2019/10/fudgy_brownie_recipe_featured.jpg'
+            },
+            {
+              title: 'Kue Donat',
+              description: 'Telur Ayam, Kentang ukuran besar, Tahu Kuning...',
+              author: 'Sarah Dwi Ayu',
+              image: 'https://3.bp.blogspot.com/-HKFupKHeDq0/VBJ92YWNJ8I/AAAAAAAAASM/aZ3uILhgW-Q/s1600/Kue%2BDonat.jpg'
+            },
+            {
+              title: 'Kue Nastar',
+              description: 'Terigu, Air, Wortel dipotong dadu / di chopper...',
+              author: 'Novie Harvie',
+              image: 'https://d12man5gwydfvl.cloudfront.net/wp-content/uploads/2019/02/Resep-Kue-Nastar-1.jpg'
+            }
+          ].map((recipe, index) => (
+            <View key={index} style={styles.recipeItem}>
+              <Image 
+                source={{uri: recipe.image}} 
+                style={styles.recipeImage} 
+                defaultSource={{uri: 'https://via.placeholder.com/94'}}
+              />
+              <View style={styles.recipeDetails}>
+                <Text style={styles.recipeTitle}>{recipe.title}</Text>
+                <Text style={styles.recipeDescription} numberOfLines={1}>
+                  {recipe.description}
+                </Text>
+                <Text style={styles.recipeAuthor}>{recipe.author}</Text>
+              </View>
+              <TouchableOpacity style={styles.bookmarkButton}>
+                <Text style={styles.bookmarkText}>+</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+
+      {/* Bottom Navigation */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.navItem}>
+          <Text style={styles.navText}>Cari resep</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Text style={styles.navText}>Koleksi Resep</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -54,565 +119,126 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white(),
   },
   header: {
-    paddingHorizontal: 24,
-    justifyContent: 'space-between',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height:52,
-    elevation: 8,
-    paddingTop:8,
-    paddingBottom:4
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grey(0.1),
   },
   title: {
     fontSize: 20,
-    fontFamily: fontType['Pjs-ExtraBold'],
+    fontWeight: 'bold',
     color: colors.black(),
   },
-  listCategory: {
-    paddingVertical: 10,
-  },
-  listBlog: {
-    paddingVertical: 10,
-    gap: 10,
-  },
-});
-const category = StyleSheet.create({
-  item: {
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    borderRadius: 25,
+  searchContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.grey(0.08),
-    marginHorizontal:5
-  },
-  title: {
-    fontFamily: fontType['Pjs-SemiBold'],
-    fontSize: 14,
-    lineHeight: 18,
-    color: colors.grey(),
-  },
-});
-const searchBar = StyleSheet.create({
-  container: {
-    marginHorizontal: 24,
-    backgroundColor: colors.grey(0.03),
-    borderColor: colors.grey(0.2),
     borderRadius: 10,
-    borderWidth: 1,
-    flexDirection: 'row',
+    margin: 20,
+    paddingHorizontal: 15,
   },
-  input: {
-    height: 40,
-    padding: 10,
-    width: '90%',
+  searchIcon: {
+    marginRight: 10,
   },
-  button: {
-    backgroundColor: colors.blue(),
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 40,
-    width: 40,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-});
-
-const ListBlog = () => {
-  return (
-    <ScrollView>
-      <View style={styles.listBlog}>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          contentContainerStyle={{gap: 15}}>
-          <View style={{...itemHorizontal.cardItem, marginLeft: 24}}>
-            <ImageBackground
-              style={itemHorizontal.cardImage}
-              resizeMode="cover"
-              imageStyle={{borderRadius: 15}}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
-              }}>
-              <View style={itemHorizontal.cardContent}>
-                <View style={itemHorizontal.cardInfo}>
-                  <Text style={itemHorizontal.cardTitle}>
-                    Exploring the World of Electric Cars
-                  </Text>
-                  <Text style={itemHorizontal.cardText}>Nov 10, 2023</Text>
-                </View>
-                <View>
-                  <View style={itemHorizontal.cardIcon}>
-                    <Receipt21 color={colors.white()} variant="Linear" size={20} />
-                  </View>
-                </View>
-              </View>
-            </ImageBackground>
-          </View>
-          <View style={itemHorizontal.cardItem}>
-            <ImageBackground
-              style={itemHorizontal.cardImage}
-              resizeMode="cover"
-              imageStyle={{borderRadius: 15}}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1574770118700-4ed7dae3310e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-              }}>
-              <View style={itemHorizontal.cardContent}>
-                <View style={itemHorizontal.cardInfo}>
-                  <Text style={itemHorizontal.cardTitle}>
-                    Exploring the World of Electric Cars
-                  </Text>
-                  <Text style={itemHorizontal.cardText}>Nov 10, 2023</Text>
-                </View>
-                <View>
-                  <View style={itemHorizontal.cardIcon}>
-                    <Receipt21 color={colors.white()} variant="Linear" size={20} />
-                  </View>
-                </View>
-              </View>
-            </ImageBackground>
-          </View>
-          <View style={itemHorizontal.cardItem}>
-            <ImageBackground
-              style={itemHorizontal.cardImage}
-              resizeMode="cover"
-              imageStyle={{borderRadius: 15}}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1591293835940-934a7c4f2d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-              }}>
-              <View style={itemHorizontal.cardContent}>
-                <View style={itemHorizontal.cardInfo}>
-                  <Text style={itemHorizontal.cardTitle}>
-                    Exploring the World of Electric Cars
-                  </Text>
-                  <Text style={itemHorizontal.cardText}>Nov 10, 2023</Text>
-                </View>
-                <View>
-                  <View style={itemHorizontal.cardIcon}>
-                    <Receipt21 color={colors.white()} variant="Linear" size={20} />
-                  </View>
-                </View>
-              </View>
-            </ImageBackground>
-          </View>
-          <View style={itemHorizontal.cardItem}>
-            <ImageBackground
-              style={itemHorizontal.cardImage}
-              resizeMode="cover"
-              imageStyle={{borderRadius: 15}}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1577048982768-5cb3e7ddfa23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80',
-              }}>
-              <View style={itemHorizontal.cardContent}>
-                <View style={itemHorizontal.cardInfo}>
-                  <Text style={itemHorizontal.cardTitle}>
-                    Baking 101: Mastering the Art of Baking
-                  </Text>
-                  <Text style={itemHorizontal.cardText}>Nov 10, 2023</Text>
-                </View>
-                <View>
-                  <View style={itemHorizontal.cardIcon}>
-                    <Receipt21 color={colors.white()} variant="Linear" size={20} />
-                  </View>
-                </View>
-              </View>
-            </ImageBackground>
-          </View>
-          <View style={{...itemHorizontal.cardItem, marginRight: 24}}>
-            <ImageBackground
-              style={itemHorizontal.cardImage}
-              resizeMode="cover"
-              imageStyle={{borderRadius: 15}}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1520&q=80',
-              }}>
-              <View style={itemHorizontal.cardContent}>
-                <View style={itemHorizontal.cardInfo}>
-                  <Text style={itemHorizontal.cardTitle}>
-                    Rediscovering Vinyl: The Resurgence of Analog
-                  </Text>
-                  <Text style={itemHorizontal.cardText}>Nov 10, 2023</Text>
-                </View>
-                <View>
-                  <View style={itemHorizontal.cardIcon}>
-                    <Receipt21 color={colors.white()} variant="Linear" size={20} />
-                  </View>
-                </View>
-              </View>
-            </ImageBackground>
-          </View>
-        </ScrollView>
-        <View style={itemVertical.listCard}>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Technology</Text>
-                  <Text style={itemVertical.cardTitle}>
-                    How to use Redux in ReactJS
-                  </Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1477013743164-ffc3a5e556da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Technology</Text>
-                  <Text style={itemVertical.cardTitle}>
-                    Boosting Traffic with SEO
-                  </Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1492683962492-deef0ec456c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1756&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Food</Text>
-                  <Text style={itemVertical.cardTitle}>
-                    Culinary Adventures: Exploring Exotic Flavors
-                  </Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1527090526205-beaac8dc3c62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Fashion</Text>
-                  <Text style={itemVertical.cardTitle}>Sneaker Culture</Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1602192509154-0b900ee1f851?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Lifestyle</Text>
-                  <Text style={itemVertical.cardTitle}>
-                    Balancing Work and Well-being
-                  </Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Health</Text>
-                  <Text style={itemVertical.cardTitle}>
-                    Home Fitness Revolution
-                  </Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-          <View style={itemVertical.cardItem}>
-            <Image
-              style={itemVertical.cardImage}
-              source={{
-                uri: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-              }}
-            />
-            <View style={itemVertical.cardContent}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{gap: 5, width: '70%'}}>
-                  <Text style={itemVertical.cardCategory}>Fashion</Text>
-                  <Text style={itemVertical.cardTitle}>
-                    Intersection of Fashion
-                  </Text>
-                </View>
-                <Receipt21
-                  color={colors.grey(0.6)}
-                  variant="Linear"
-                  size={20}
-                />
-              </View>
-              <View style={itemVertical.cardInfo}>
-                <Clock
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>Jul 25, 2023</Text>
-                <Message
-                  size={10}
-                  variant="Linear"
-                  color={colors.grey(0.6)}
-                />
-                <Text style={itemVertical.cardText}>89</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
-  );
-};
-const itemVertical = StyleSheet.create({
-  listCard: {
-    paddingHorizontal: 24,
-    paddingVertical: 10,
-    gap: 15,
-  },
-  cardItem: {
-    backgroundColor: colors.blue(0.03),
-    flexDirection: 'row',
-    borderRadius: 10,
-  },
-  cardCategory: {
-    color: colors.blue(),
-    fontSize: 10,
-    fontFamily: fontType['Pjs-SemiBold'],
-  },
-  cardTitle: {
-    fontSize: 14,
-    fontFamily: fontType['Pjs-Bold'],
+  searchInput: {
+    flex: 1,
+    height: 50,
     color: colors.black(),
   },
-  cardText: {
-    fontSize: 10,
-    fontFamily: fontType['Pjs-Medium'],
-    color: colors.blue(0.6),
+  clearButton: {
+    fontSize: 20,
+    color: colors.grey(0.6),
   },
-  cardImage: {
+  popularRecipesContainer: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    color: colors.black(),
+  },
+  popularRecipesScroll: {
+    paddingHorizontal: 20,
+  },
+  popularRecipeItem: {
+    marginRight: 15,
+    alignItems: 'center',
+  },
+  popularRecipeImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  popularRecipeTitle: {
+    marginTop: 5,
+    fontSize: 12,
+    color: colors.black(),
+  },
+  latestRecipesContainer: {
+    flex: 1,
+  },
+  recipeItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.blue(0.03),
+    marginHorizontal: 20,
+    marginBottom: 15,
+    borderRadius: 10,
+    padding: 10,
+  },
+  recipeImage: {
     width: 94,
     height: 94,
     borderRadius: 10,
-    resizeMode: 'cover',
   },
-  cardInfo: {
-    flexDirection: 'row',
-    gap: 5,
+  recipeDetails: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  recipeTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: colors.black(),
+  },
+  recipeDescription: {
+    fontSize: 12,
+    color: colors.grey(0.6),
+    marginVertical: 5,
+  },
+  recipeAuthor: {
+    fontSize: 10,
+    color: colors.blue(0.6),
+  },
+  bookmarkButton: {
+    backgroundColor: colors.blue(),
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  cardContent: {
-    gap: 10,
-    justifyContent: 'space-between',
-    paddingRight: 10,
-    paddingLeft: 15,
-    flex: 1,
-    paddingVertical: 10,
+  bookmarkText: {
+    color: colors.white(),
+    fontSize: 20,
   },
-});
-const itemHorizontal = StyleSheet.create({
-  cardItem: {
-    width: 280,
-  },
-  cardImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 5,
-  },
-  cardContent: {
+  bottomNav: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 15,
+    justifyContent: 'space-around',
+    borderTopWidth: 1,
+    borderTopColor: colors.grey(0.1),
+    paddingVertical: 15,
+    backgroundColor: colors.white(),
   },
-  cardInfo: {
-    justifyContent: 'flex-end',
-    height: '100%',
-    gap: 10,
-    maxWidth: '60%',
+  navItem: {
+    alignItems: 'center',
   },
-  cardTitle: {
-    fontFamily: fontType['Pjs-Bold'],
+  navText: {
     fontSize: 14,
-    color: colors.white(),
-  },
-  cardText: {
-    fontSize: 10,
-    color: colors.white(),
-    fontFamily: fontType['Pjs-Medium'],
-  },
-  cardIcon: {
-    backgroundColor: colors.white(0.33),
-    padding: 5,
-    borderColor: colors.white(),
-    borderWidth: 0.5,
-    borderRadius: 5,
+    color: colors.black(),
   },
 });
