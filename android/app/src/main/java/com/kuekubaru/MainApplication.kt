@@ -1,4 +1,4 @@
-package com.kueku
+package com.kuekubaru
 
 import android.app.Application
 import com.facebook.react.PackageList
