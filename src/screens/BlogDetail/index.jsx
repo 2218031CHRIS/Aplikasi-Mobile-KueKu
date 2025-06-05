@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Animated, Easing } from 'react-native';
+import React, { useState, useRef } from 'react';
 import { ArrowLeft, Like1, Receipt21, Message, Share, More } from 'iconsax-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BlogList } from '../../data';
@@ -27,6 +27,48 @@ const BlogDetail = ({ route }) => {
   });
   const selectedBlog = BlogList.find(blog => blog.id === blogId);
   const navigation = useNavigation();
+
+  // Animation refs
+  const imageOpacity = useRef(new Animated.Value(0)).current;
+  const likeScale = useRef(new Animated.Value(1)).current;
+  const bookmarkScale = useRef(new Animated.Value(1)).current;
+
+  // Fade-in image
+  const onImageLoad = () => {
+    Animated.timing(imageOpacity, {
+      toValue: 1,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  // Scale animation for icons
+  const animateIcon = (scaleAnim) => {
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
+        toValue: 1.3,
+        duration: 120,
+        useNativeDriver: true,
+        easing: Easing.out(Easing.ease),
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 120,
+        useNativeDriver: true,
+        easing: Easing.out(Easing.ease),
+      }),
+    ]).start();
+  };
+
+  const onLikePress = () => {
+    toggleIcon('liked');
+    animateIcon(likeScale);
+  };
+
+  const onBookmarkPress = () => {
+    toggleIcon('bookmarked');
+    animateIcon(bookmarkScale);
+  };
 
   const toggleIcon = iconName => {
     setIconStates(prevStates => ({
@@ -59,15 +101,18 @@ const BlogDetail = ({ route }) => {
           paddingTop: 62,
           paddingBottom: 54,
         }}>
-        <FastImage
-          style={styles.image}
-          source={{
-            uri: selectedBlog.image,
-            headers: { Authorization: 'someAuthToken' },
-            priority: FastImage.priority.high,
-          }}
-          resizeMode={FastImage.resizeMode.cover}
-        />
+        <Animated.View style={{ opacity: imageOpacity }}>
+          <FastImage
+            style={styles.image}
+            source={{
+              uri: selectedBlog.image,
+              headers: { Authorization: 'someAuthToken' },
+              priority: FastImage.priority.high,
+            }}
+            resizeMode={FastImage.resizeMode.cover}
+            onLoad={onImageLoad}
+          />
+        </Animated.View>
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -81,8 +126,10 @@ const BlogDetail = ({ route }) => {
       </ScrollView>
       <View style={styles.bottomBar}>
         <View style={{ flexDirection: 'row', gap: 5, alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => toggleIcon('liked')}>
-            <Like1 color={iconStates.liked.color} variant={iconStates.liked.variant} size={24} />
+          <TouchableOpacity onPress={onLikePress}>
+            <Animated.View style={{ transform: [{ scale: likeScale }] }}>
+              <Like1 color={iconStates.liked.color} variant={iconStates.liked.variant} size={24} />
+            </Animated.View>
           </TouchableOpacity>
           <Text style={styles.info}>
             {formatNumber(selectedBlog.totalLikes)}
@@ -94,8 +141,10 @@ const BlogDetail = ({ route }) => {
             {formatNumber(selectedBlog.totalComments)}
           </Text>
         </View>
-        <TouchableOpacity onPress={() => toggleIcon('bookmarked')}>
-          <Receipt21 color={iconStates.bookmarked.color} variant={iconStates.bookmarked.variant} size={24} />
+        <TouchableOpacity onPress={onBookmarkPress}>
+          <Animated.View style={{ transform: [{ scale: bookmarkScale }] }}>
+            <Receipt21 color={iconStates.bookmarked.color} variant={iconStates.bookmarked.variant} size={24} />
+          </Animated.View>
         </TouchableOpacity>
       </View>
     </View>
