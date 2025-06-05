@@ -5,6 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import { fontType, colors } from '../../theme';
 import firestore from '@react-native-firebase/firestore';
 
+// Import notifee untuk notifikasi lokal
+import notifee, { AndroidImportance } from '@notifee/react-native';
+
 const AddBlogForm = () => {
   const dataCategory = [
     { id: 1, name: 'Populer' },
@@ -31,6 +34,25 @@ const AddBlogForm = () => {
     });
   };
 
+  // Fungsi untuk menampilkan notifikasi lokal dengan notifee
+  const showLocalNotification = async (title, message) => {
+    // Pastikan channel sudah dibuat (Android)
+    await notifee.createChannel({
+      id: 'blog-channel',
+      name: 'Blog Channel',
+      importance: AndroidImportance.HIGH,
+    });
+
+    await notifee.displayNotification({
+      title: title,
+      body: message,
+      android: {
+        channelId: 'blog-channel',
+        smallIcon: 'ic_launcher', // pastikan ada di android/app/src/main/res/mipmap
+      },
+    });
+  };
+
   // Handler upload ke Firestore
   const handleUpload = async () => {
     if (!blogData.title || !blogData.content || !blogData.category.id || !blogData.image) {
@@ -50,6 +72,11 @@ const AddBlogForm = () => {
           image: blogData.image,
           createdAt: firestore.FieldValue.serverTimestamp(),
         });
+      // Tampilkan notifikasi lokal setelah upload berhasil
+      await showLocalNotification(
+        'Blog Uploaded',
+        `Blog "${blogData.title}" berhasil di-upload!`
+      );
       Alert.alert('Success', 'Blog uploaded successfully!');
       navigation.goBack();
     } catch (error) {
