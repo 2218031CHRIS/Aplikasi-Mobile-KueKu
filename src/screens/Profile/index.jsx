@@ -1,32 +1,60 @@
-import {ScrollView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {ScrollView, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, RefreshControl} from 'react-native';
+import {Edit, Setting2} from 'iconsax-react-native';
+import React, { useState, useCallback} from 'react';
 import FastImage from '@d11/react-native-fast-image';
-import {ProfileData, BlogList} from '../../data';
+import {ProfileData} from '../../data';
 import {ItemSmall} from '../../components';
-import { fontType, colors } from '../../theme';
-import {Setting2, Edit} from 'iconsax-react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
+import {fontType, colors} from '../../theme';
 
-const formatNumber = number => {
-  if (number >= 1000000000) {
-    return (number / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
-  }
-  if (number >= 1000000) {
-    return (number / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-  }
-  if (number >= 1000) {
-    return (number / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-  }
-  return number.toString();
-};
-const data = BlogList.slice(5);
+import axios from 'axios';
 
-const Profile = () => { 
+const Profile = () => {
   const navigation = useNavigation();
+  
+  // status untuk menandakan apakah terjadi loading/tidak
+  const [loading, setLoading] = useState(true);
+  // state blod data untuk menyimpan list (array) dari blog
+  const [blogData, setBlogData] = useState([]);
+  // status untuk menyimpan status refreshing
+  const [refreshing, setRefreshing] = useState(false);
+  
+  const getDataBlog = async () => {
+    try {
+      // ambil data dari API dengan metode GET
+      const response = await axios.get(
+        'https://6841b632d48516d1d35c9c87.mockapi.io/api/blog',
+      );
+      // atur state blogData sesuai dengan data yang
+      // di dapatkan dari API
+      setBlogData(response.data);
+      // atur loading menjadi false
+      setLoading(false)
+    } catch (error) {
+        console.error(error);
+    }
+  };
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      getDataBlog()
+      setRefreshing(false);
+    }, 1500);
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getDataBlog();
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Setting2 color={colors.black()} variant="Linear" size={24} />
+        <TouchableOpacity>
+          <Setting2 color={colors.black()} variant="Linear" size={24} />
+        </TouchableOpacity>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -34,7 +62,9 @@ const Profile = () => {
           paddingHorizontal: 24,
           gap: 10,
           paddingVertical: 20,
-        }}>
+        }} refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={{gap: 15, alignItems: 'center'}}>
           <FastImage
             style={profile.pic}
@@ -58,44 +88,64 @@ const Profile = () => {
             </View>
             <View style={{alignItems: 'center', gap: 5}}>
               <Text style={profile.sum}>
-                {formatNumber(ProfileData.following)}
               </Text>
               <Text style={profile.tag}>Following</Text>
             </View>
             <View style={{alignItems: 'center', gap: 5}}>
               <Text style={profile.sum}>
-                {formatNumber(ProfileData.follower)}
               </Text>
               <Text style={profile.tag}>Follower</Text>
             </View>
           </View>
-          {/* MODIFIKASI: Navigasi ke EditProfile */}
-          <TouchableOpacity
-            style={profile.buttonEdit}
-            onPress={() => navigation.navigate('EditProfile')}
-          >
+          <TouchableOpacity style={profile.buttonEdit}>
             <Text style={profile.buttonText}>Edit Profile</Text>
           </TouchableOpacity>
         </View>
-        <View style={{paddingVertical: 10, gap:10}}>
-          {data.map((item, index) => (
-            <ItemSmall item={item} key={index} />
-          ))}
+        <View style={{paddingVertical: 10, gap: 10}}>
+          {/* Tampilkan Blog Data */}
+          {loading ? (
+            <ActivityIndicator size={'large'} color={colors.blue()} />
+          ) : (
+            blogData.map((item, index) => <ItemSmall item={item} key={index} />)
+          )}
         </View>
       </ScrollView>
-      {/* MODIFIKASI: Navigasi ke AddBlog */}
       <TouchableOpacity
         style={styles.floatingButton}
-        onPress={() => navigation.navigate('AddBlog')}>
+        onPress={() => navigation.navigate('AddBlogForm')}>
         <Edit color={colors.white()} variant="Linear" size={20} />
       </TouchableOpacity>
     </View>
   );
 };
+
 export default Profile;
 
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white(),
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  header: {
+    paddingHorizontal: 24,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 52,
+    elevation: 8,
+    paddingTop: 8,
+    paddingBottom: 4,
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: fontType['Pjs-ExtraBold'],
+    color: colors.black(),
+  },
   floatingButton: {
     backgroundColor: colors.blue(),
     padding: 15,
@@ -113,34 +163,13 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
-  container: {
-    flex: 1,
-    backgroundColor: colors.white(),
-  },
-  header: {
-    paddingHorizontal: 24,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 52,
-    elevation: 8,
-    paddingTop: 8,
-    paddingBottom: 4,
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: fontType['Pjs-ExtraBold'],
-    color: colors.black(),
-  },
 });
-
 const profile = StyleSheet.create({
   pic: {width: 100, height: 100, borderRadius: 15},
   name: {
     color: colors.black(),
     fontSize: 20,
-    fontFamily: fontType['Pjs-Bold'],
-    textTransform:'capitalize'
+    fontFamily: fontType['Pjs-ExtraBold'],
   },
   info: {
     fontSize: 12,

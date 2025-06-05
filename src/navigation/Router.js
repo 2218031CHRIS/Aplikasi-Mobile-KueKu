@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Discover, Bookmark, Profile, BlogDetail, AddBlogForm, Search} from '../screens';
+import { Home, Discover, Bookmark, Profile, BlogDetail, AddBlogForm, Search, EditBlogForm} from '../screens';
 import { Home2, LocationDiscover, Receipt21, ProfileCircle } from 'iconsax-react-native';
 import { fontType, colors } from '../theme';
 import { SearchBar } from '../components';
@@ -118,6 +118,18 @@ const Router = () => {
         options={{
           headerShown: false, 
           presentation: 'transparentModal',
+        }}
+      />
+<Stack.Screen
+        name="EditBlog"
+        component={EditBlogForm}
+        options={{
+          headerShown: false,
+          animationEnabled: true,
+          animationTypeForReplace: 'pop',
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          ...TransitionPresets.SlideFromRightIOS,
         }}
       />
 
