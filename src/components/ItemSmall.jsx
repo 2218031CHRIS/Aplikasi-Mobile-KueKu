@@ -1,52 +1,51 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import FastImage from '@d11/react-native-fast-image';
-import {Receipt21, Clock, Message} from 'iconsax-react-native';
+import { Receipt21, Clock, Message } from 'iconsax-react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { fontType, colors } from '../theme';
 
-const ItemSmall = ({item}) => {
+
+const ItemSmall = ({ item }) => {
+  const navigation = useNavigation();
+
+  // Handler untuk navigasi ke BlogDetail
+  const handlePress = () => {
+    // Navigasi ke screen 'BlogDetail' dengan parameter blogId
+    navigation.navigate('BlogDetail', { blogId: item.id });
+  };
+
   return (
-    <View style={styles.cardItem}>
+    <TouchableOpacity style={styles.cardItem} onPress={handlePress}>
       <FastImage
         style={styles.cardImage}
         source={{
-          uri: item.image,
-          headers: {Authorization: 'someAuthToken'},
+          uri: item?.image,
+          headers: { Authorization: 'someAuthToken' },
           priority: FastImage.priority.high,
         }}
         resizeMode={FastImage.resizeMode.cover}
       />
       <View style={styles.cardContent}>
-        <View
-          style={{
-            flexDirection: 'row',
-            gap:30
-          }}>
-          <View style={{gap: 5, flex:1}}>
-            <Text style={styles.cardCategory}>{item.category}</Text>
-            <Text style={styles.cardTitle}>{item.title}</Text>
+        <View style={{ flexDirection: 'row', gap: 30 }}>
+          <View style={{ gap: 5, flex: 1 }}>
+            <Text style={styles.cardCategory}>{item.category?.name}</Text>
+            <Text style={styles.cardTitle}>{item?.title}</Text>
           </View>
-          <Receipt21
-            color={colors.grey(0.6)}
-            variant="Linear"
-            size={20}
-          />
+          <Receipt21 color={colors.grey(0.6)} variant="Linear" size={20} />
         </View>
         <View style={styles.cardInfo}>
           <Clock size={10} variant="Linear" color={colors.grey(0.6)} />
-          <Text style={styles.cardText}>{item.createdAt}</Text>
-          <Message
-            size={10}
-            variant="Linear"
-            color={colors.grey(0.6)}
-          />
-          <Text style={styles.cardText}>{item.totalComments}</Text>
+          <Message size={10} variant="Linear" color={colors.grey(0.6)} />
+          <Text style={styles.cardText}>{item?.totalComments}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
+
 export default ItemSmall;
+
 const styles = StyleSheet.create({
   listCard: {
     paddingHorizontal: 24,

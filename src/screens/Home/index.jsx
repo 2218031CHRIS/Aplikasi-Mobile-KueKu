@@ -1,7 +1,10 @@
+import React, { useState } from 'react'; // <<< Tambahkan React dan useState
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, TextInput, Pressable } from 'react-native'; // <<< Tambahkan semua komponen React Native yang digunakan
+import { Notification, SearchNormal } from 'iconsax-react-native'; // <<< Tambahkan ikon yang digunakan
+
 import {fontType, colors} from '../../theme';
 import {ListHorizontal, ItemSmall} from '../../components';
 import {CategoryList, BlogList} from '../../data';
-
 
 const ItemCategory = ({item, onPress, color}) => {
   return (
@@ -28,8 +31,8 @@ const FlatListCategory = () => {
   return (
     <FlatList
       data={CategoryList}
-      keyExtractor={item => item.id}
-      renderItem={item => renderItem({...item})}
+      keyExtractor={item => item.id.toString()} // <<< Pastikan keyExtractor mengembalikan string
+      renderItem={renderItem} // <<< Langsung gunakan renderItem
       ItemSeparatorComponent={() => <View style={{width: 10}} />}
       contentContainerStyle={{paddingHorizontal: 24}}
       horizontal
@@ -37,8 +40,6 @@ const FlatListCategory = () => {
     />
   );
 };
-
-
 
 export default function Home() {
   return (
@@ -49,12 +50,12 @@ export default function Home() {
       </View>
       <View style={searchBar.container}>
            <TextInput
-                    style={searchBar.input}
-                    placeholder="Search"
-                />
+                       style={searchBar.input}
+                       placeholder="Search"
+                   />
            <Pressable style={searchBar.button}>
-                    <SearchNormal size={20} color={colors.white()} />
-         </Pressable>
+                   <SearchNormal size={20} color={colors.white()} />
+           </Pressable>
       </View>
       <View style={styles.listCategory}>
         <FlatListCategory />
@@ -155,8 +156,6 @@ const ListBlog = () => {
   );
 };
 
-
-
 const itemVertical = StyleSheet.create({
   listCard: {
     paddingHorizontal: 24,
@@ -203,6 +202,7 @@ const itemVertical = StyleSheet.create({
     paddingVertical: 10,
   },
 });
+
 const itemHorizontal = StyleSheet.create({
   cardItem: {
     width: 280,

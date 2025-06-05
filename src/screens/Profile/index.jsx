@@ -1,10 +1,11 @@
 import {ScrollView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Setting2} from 'iconsax-react-native';
 import React from 'react';
 import FastImage from '@d11/react-native-fast-image';
 import {ProfileData, BlogList} from '../../data';
 import {ItemSmall} from '../../components';
 import { fontType, colors } from '../../theme';
+import {Setting2, Edit} from 'iconsax-react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const formatNumber = number => {
   if (number >= 1000000000) {
@@ -19,7 +20,9 @@ const formatNumber = number => {
   return number.toString();
 };
 const data = BlogList.slice(5);
-const Profile = () => {
+
+const Profile = () => { 
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -66,7 +69,11 @@ const Profile = () => {
               <Text style={profile.tag}>Follower</Text>
             </View>
           </View>
-          <TouchableOpacity style={profile.buttonEdit}>
+          {/* MODIFIKASI: Navigasi ke EditProfile */}
+          <TouchableOpacity
+            style={profile.buttonEdit}
+            onPress={() => navigation.navigate('EditProfile')}
+          >
             <Text style={profile.buttonText}>Edit Profile</Text>
           </TouchableOpacity>
         </View>
@@ -76,11 +83,36 @@ const Profile = () => {
           ))}
         </View>
       </ScrollView>
+      {/* MODIFIKASI: Navigasi ke AddBlog */}
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => navigation.navigate('AddBlog')}>
+        <Edit color={colors.white()} variant="Linear" size={20} />
+      </TouchableOpacity>
     </View>
   );
 };
 export default Profile;
+
+
 const styles = StyleSheet.create({
+  floatingButton: {
+    backgroundColor: colors.blue(),
+    padding: 15,
+    position: 'absolute',
+    bottom: 24,
+    right: 24,
+    borderRadius: 10,
+    shadowColor: colors.blue(),
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.white(),
@@ -101,6 +133,7 @@ const styles = StyleSheet.create({
     color: colors.black(),
   },
 });
+
 const profile = StyleSheet.create({
   pic: {width: 100, height: 100, borderRadius: 15},
   name: {

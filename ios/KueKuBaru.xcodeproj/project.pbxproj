@@ -7,24 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C80B921A6F3F58F76C31292 /* libPods-KueKuBaru.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-KueKuBaru.a */; };
+		0C80B921A6F3F58F76C31292 /* libPods-KUEKUBARU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-KUEKUBARU.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		5AE3A3A7E7E64EAAAAFA23A3 /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 107407C53BAD4A289FAAEB7F /* PlusJakartaSans-Bold.ttf */; };
-		912F632B18C547768699665A /* PlusJakartaSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44F00BC6D1324966806C8C22 /* PlusJakartaSans-BoldItalic.ttf */; };
-		D7EA860F04E346C69AA3A75C /* PlusJakartaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E60F0EEF6DFA46BF893CA967 /* PlusJakartaSans-ExtraBold.ttf */; };
-		2B504A0812A64ADFAE800818 /* PlusJakartaSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A5A536D124ECF9403E7EC /* PlusJakartaSans-ExtraBoldItalic.ttf */; };
-		26B5B5C636154252821BC529 /* PlusJakartaSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DCBE7F1EFC048B4A493F1C4 /* PlusJakartaSans-ExtraLight.ttf */; };
-		8806BE049E85436FB8FFD18B /* PlusJakartaSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAE0CCC102DE48F4839F0DDE /* PlusJakartaSans-ExtraLightItalic.ttf */; };
-		95ABB7BF2497492AB15C710A /* PlusJakartaSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D86E5EC3A83414F9B730C76 /* PlusJakartaSans-Italic.ttf */; };
-		618EE243591A4ACDA6077337 /* PlusJakartaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A13C01B43E1442A5AEA1D6A5 /* PlusJakartaSans-Light.ttf */; };
-		C7CA5BD6FF3140D7AF3DA17C /* PlusJakartaSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E2EDBA1B8FD44ED865F9236 /* PlusJakartaSans-LightItalic.ttf */; };
-		7FEDCBC96C444BEFAB74821D /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FECCF576DCC0441184741C6E /* PlusJakartaSans-Medium.ttf */; };
-		54D95EA4DCF9452EB2DB8430 /* PlusJakartaSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D861B1A96784A01B9BCBBA5 /* PlusJakartaSans-MediumItalic.ttf */; };
-		CE2E6112B5684EED8CCC26B0 /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8BB74D580947A9A8F24235 /* PlusJakartaSans-Regular.ttf */; };
-		E5CDF44E8ECF4F3BBCE384FB /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EAE9C723F0E4561A47EDED3 /* PlusJakartaSans-SemiBold.ttf */; };
-		F40FD232CB6B4A4C8014F86C /* PlusJakartaSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D600125633C047FE999E43BA /* PlusJakartaSans-SemiBoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,36 +19,22 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = KueKuBaru;
+			remoteInfo = KUEKUBARU;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* KueKuBaru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KueKuBaru.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = KueKuBaru/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KueKuBaru/Info.plist; sourceTree = "<group>"; };
-		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = KueKuBaru/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-KueKuBaru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KueKuBaru.debug.xcconfig"; path = "Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-KueKuBaru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KueKuBaru.release.xcconfig"; path = "Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru.release.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-KueKuBaru.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KueKuBaru.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = KueKuBaru/AppDelegate.swift; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = KueKuBaru/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* KUEKUBARU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KUEKUBARU.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = KUEKUBARU/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KUEKUBARU/Info.plist; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = KUEKUBARU/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-KUEKUBARU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KUEKUBARU.debug.xcconfig"; path = "Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-KUEKUBARU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KUEKUBARU.release.xcconfig"; path = "Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU.release.xcconfig"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-KUEKUBARU.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KUEKUBARU.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = KUEKUBARU/AppDelegate.swift; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = KUEKUBARU/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		107407C53BAD4A289FAAEB7F /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Bold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		44F00BC6D1324966806C8C22 /* PlusJakartaSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-BoldItalic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E60F0EEF6DFA46BF893CA967 /* PlusJakartaSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-ExtraBold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2D9A5A536D124ECF9403E7EC /* PlusJakartaSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2DCBE7F1EFC048B4A493F1C4 /* PlusJakartaSans-ExtraLight.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-ExtraLight.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EAE0CCC102DE48F4839F0DDE /* PlusJakartaSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-ExtraLightItalic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9D86E5EC3A83414F9B730C76 /* PlusJakartaSans-Italic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Italic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A13C01B43E1442A5AEA1D6A5 /* PlusJakartaSans-Light.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Light.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7E2EDBA1B8FD44ED865F9236 /* PlusJakartaSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-LightItalic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FECCF576DCC0441184741C6E /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Medium.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2D861B1A96784A01B9BCBBA5 /* PlusJakartaSans-MediumItalic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-MediumItalic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6F8BB74D580947A9A8F24235 /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Regular.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9EAE9C723F0E4561A47EDED3 /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-SemiBold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D600125633C047FE999E43BA /* PlusJakartaSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/PlusJakartaSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-KueKuBaru.a in Frameworks */,
+				0C80B921A6F3F58F76C31292 /* libPods-KUEKUBARU.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +57,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* KueKuBaru */ = {
+		13B07FAE1A68108700A75B9A /* KUEKUBARU */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -94,14 +66,14 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
-			name = KueKuBaru;
+			name = KUEKUBARU;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-KueKuBaru.a */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-KUEKUBARU.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,12 +88,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* KueKuBaru */,
+				13B07FAE1A68108700A75B9A /* KUEKUBARU */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
-				BA05544E99F84E22959E9902 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -131,7 +102,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* KueKuBaru.app */,
+				13B07F961A680F5B00A75B9A /* KUEKUBARU.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,40 +110,18 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-KueKuBaru.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-KueKuBaru.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-KUEKUBARU.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-KUEKUBARU.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		BA05544E99F84E22959E9902 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				107407C53BAD4A289FAAEB7F /* PlusJakartaSans-Bold.ttf */,
-				44F00BC6D1324966806C8C22 /* PlusJakartaSans-BoldItalic.ttf */,
-				E60F0EEF6DFA46BF893CA967 /* PlusJakartaSans-ExtraBold.ttf */,
-				2D9A5A536D124ECF9403E7EC /* PlusJakartaSans-ExtraBoldItalic.ttf */,
-				2DCBE7F1EFC048B4A493F1C4 /* PlusJakartaSans-ExtraLight.ttf */,
-				EAE0CCC102DE48F4839F0DDE /* PlusJakartaSans-ExtraLightItalic.ttf */,
-				9D86E5EC3A83414F9B730C76 /* PlusJakartaSans-Italic.ttf */,
-				A13C01B43E1442A5AEA1D6A5 /* PlusJakartaSans-Light.ttf */,
-				7E2EDBA1B8FD44ED865F9236 /* PlusJakartaSans-LightItalic.ttf */,
-				FECCF576DCC0441184741C6E /* PlusJakartaSans-Medium.ttf */,
-				2D861B1A96784A01B9BCBBA5 /* PlusJakartaSans-MediumItalic.ttf */,
-				6F8BB74D580947A9A8F24235 /* PlusJakartaSans-Regular.ttf */,
-				9EAE9C723F0E4561A47EDED3 /* PlusJakartaSans-SemiBold.ttf */,
-				D600125633C047FE999E43BA /* PlusJakartaSans-SemiBoldItalic.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* KueKuBaru */ = {
+		13B07F861A680F5B00A75B9A /* KUEKUBARU */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KueKuBaru" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KUEKUBARU" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -186,9 +135,9 @@
 			);
 			dependencies = (
 			);
-			name = KueKuBaru;
-			productName = KueKuBaru;
-			productReference = 13B07F961A680F5B00A75B9A /* KueKuBaru.app */;
+			name = KUEKUBARU;
+			productName = KUEKUBARU;
+			productReference = 13B07F961A680F5B00A75B9A /* KUEKUBARU.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -204,7 +153,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "KueKuBaru" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "KUEKUBARU" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -217,7 +166,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* KueKuBaru */,
+				13B07F861A680F5B00A75B9A /* KUEKUBARU */,
 			);
 		};
 /* End PBXProject section */
@@ -236,20 +185,6 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				5AE3A3A7E7E64EAAAAFA23A3 /* PlusJakartaSans-Bold.ttf in Resources */,
-				912F632B18C547768699665A /* PlusJakartaSans-BoldItalic.ttf in Resources */,
-				D7EA860F04E346C69AA3A75C /* PlusJakartaSans-ExtraBold.ttf in Resources */,
-				2B504A0812A64ADFAE800818 /* PlusJakartaSans-ExtraBoldItalic.ttf in Resources */,
-				26B5B5C636154252821BC529 /* PlusJakartaSans-ExtraLight.ttf in Resources */,
-				8806BE049E85436FB8FFD18B /* PlusJakartaSans-ExtraLightItalic.ttf in Resources */,
-				95ABB7BF2497492AB15C710A /* PlusJakartaSans-Italic.ttf in Resources */,
-				618EE243591A4ACDA6077337 /* PlusJakartaSans-Light.ttf in Resources */,
-				C7CA5BD6FF3140D7AF3DA17C /* PlusJakartaSans-LightItalic.ttf in Resources */,
-				7FEDCBC96C444BEFAB74821D /* PlusJakartaSans-Medium.ttf in Resources */,
-				54D95EA4DCF9452EB2DB8430 /* PlusJakartaSans-MediumItalic.ttf in Resources */,
-				CE2E6112B5684EED8CCC26B0 /* PlusJakartaSans-Regular.ttf in Resources */,
-				E5CDF44E8ECF4F3BBCE384FB /* PlusJakartaSans-SemiBold.ttf in Resources */,
-				F40FD232CB6B4A4C8014F86C /* PlusJakartaSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,15 +213,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
@@ -304,7 +239,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KueKuBaru-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KUEKUBARU-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -317,15 +252,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KueKuBaru/Pods-KueKuBaru-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KUEKUBARU/Pods-KUEKUBARU-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -344,7 +279,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* KueKuBaru */;
+			target = 13B07F861A680F5B00A75B9A /* KUEKUBARU */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -352,13 +287,13 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-KueKuBaru.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-KUEKUBARU.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = KueKuBaru/Info.plist;
+				INFOPLIST_FILE = KUEKUBARU/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -371,7 +306,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = KueKuBaru;
+				PRODUCT_NAME = KUEKUBARU;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -380,12 +315,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-KueKuBaru.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-KUEKUBARU.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = KueKuBaru/Info.plist;
+				INFOPLIST_FILE = KUEKUBARU/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -398,7 +333,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = KueKuBaru;
+				PRODUCT_NAME = KUEKUBARU;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -546,7 +481,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KueKuBaru" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KUEKUBARU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -555,7 +490,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "KueKuBaru" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "KUEKUBARU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
