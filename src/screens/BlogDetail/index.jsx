@@ -1,11 +1,14 @@
 import {StyleSheet, Text, View, TouchableOpacity, Animated, ActivityIndicator, Alert} from 'react-native';
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState, useRef, useCallback} from 'react';
 import {ArrowLeft, Like1, Receipt21, Message, Share, More} from 'iconsax-react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import FastImage from '@d11/react-native-fast-image';
 import {fontType, colors} from '../../theme';
-import axios from 'axios';
+// import axios from 'axios'; // HAPUS axios
 import ActionSheet from 'react-native-actions-sheet';
+
+// Tambahkan Firebase Firestore
+import firestore from '@react-native-firebase/firestore';
 
 const BlogDetail = ({route}) => {
   const {blogId} = route.params;
@@ -28,23 +31,25 @@ const BlogDetail = ({route}) => {
     actionSheetRef.current?.hide();
   };
 
+  // Ambil data blog dari Firestore secara realtime
   useFocusEffect(
     useCallback(() => {
-      getBlogById();
+      const unsubscribe = firestore()
+        .collection('blogs')
+        .doc(blogId)
+        .onSnapshot(doc => {
+          if (doc.exists) {
+            setSelectedBlog({id: doc.id, ...doc.data()});
+          }
+          setLoading(false);
+        }, error => {
+          Alert.alert('Error', error.message);
+          setLoading(false);
+        });
+
+      return () => unsubscribe();
     }, [blogId])
   );
-
-  const getBlogById = async () => {
-    try {
-      const response = await axios.get(
-        `https://6841b632d48516d1d35c9c87.mockapi.io/api/blog/${blogId}`,
-      );
-      setSelectedBlog(response.data);
-      setLoading(false);
-    } catch (error) {
-      Alert.alert('error', `${error.Message}`);
-    }
-  };
 
   const navigation = useNavigation();
 
@@ -56,13 +61,11 @@ const BlogDetail = ({route}) => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      const response = await axios.delete(`https://6841b632d48516d1d35c9c87.mockapi.io/api/blog/${blogId}`);
-      if (response.status == 200) {
-        closeActionSheet();
-        navigation.goBack();
-      }
+      await firestore().collection('blogs').doc(blogId).delete();
+      closeActionSheet();
+      navigation.goBack();
     } catch (error) {
-      Alert.alert('Gagal Menghapus Blog', `${error.Message}`);
+      Alert.alert('Gagal Menghapus Blog', error.message);
     } finally {
       setLoading(false);
     }
@@ -90,6 +93,7 @@ const BlogDetail = ({route}) => {
             : colors.grey(0.6),
       },
     }));
+    // Jika ingin update like/bookmark ke Firestore, tambahkan kode di sini
   };
 
   return (
@@ -143,8 +147,10 @@ const BlogDetail = ({route}) => {
               justifyContent: 'space-between',
               marginTop: 15,
             }}>
-            <Text style={styles.category}>{selectedBlog?.category?.name}</Text>
-            <Text style={styles.date}>{selectedBlog?.createdAt}</Text>
+            <Text style={styles.category}>
+              {selectedBlog?.category?.name ?? selectedBlog?.category}
+            </Text>
+            {/* Hapus penampilan tanggal karena createdAt tidak ada */}
           </View>
           <Text style={styles.title}>{selectedBlog?.title}</Text>
           <Text style={styles.content}>{selectedBlog?.content}</Text>
@@ -244,7 +250,6 @@ const BlogDetail = ({route}) => {
 };
 
 export default BlogDetail;
-
 
 const styles = StyleSheet.create({
   container: {

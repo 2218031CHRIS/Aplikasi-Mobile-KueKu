@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert,
 import { ArrowLeft } from 'iconsax-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { fontType, colors } from '../../theme';
-import axios from 'axios';
+import firestore from '@react-native-firebase/firestore';
 
 const AddBlogForm = () => {
   const dataCategory = [
@@ -31,7 +31,7 @@ const AddBlogForm = () => {
     });
   };
 
-  // Handler upload, setelah upload kembali ke halaman sebelumnya (Stack Navigation)
+  // Handler upload ke Firestore
   const handleUpload = async () => {
     if (!blogData.title || !blogData.content || !blogData.category.id || !blogData.image) {
       Alert.alert('Error', 'Please fill all required fields!');
@@ -39,23 +39,21 @@ const AddBlogForm = () => {
     }
     setLoading(true);
     try {
-      // Ganti URL berikut dengan endpoint REST API Anda
-      const response = await axios.post('https://6841b632d48516d1d35c9c87.mockapi.io/api/blog', {
-        title: blogData.title,
-        content: blogData.content,
-        category: blogData.category,
-        totalLikes: blogData.totalLikes,
-        totalComments: blogData.totalComments,
-        image: blogData.image, // URL gambar
-      });
-      if (response.status === 201 || response.status === 200) {
-        Alert.alert('Success', 'Blog uploaded successfully!');
-        navigation.goBack();
-      } else {
-        Alert.alert('Error', 'Failed to upload blog');
-      }
+      await firestore()
+        .collection('blogs')
+        .add({
+          title: blogData.title,
+          content: blogData.content,
+          category: blogData.category,
+          totalLikes: blogData.totalLikes,
+          totalComments: blogData.totalComments,
+          image: blogData.image,
+          createdAt: firestore.FieldValue.serverTimestamp(),
+        });
+      Alert.alert('Success', 'Blog uploaded successfully!');
+      navigation.goBack();
     } catch (error) {
-      Alert.alert('Error', error.response?.data?.message || error.message || 'Failed to upload blog');
+      Alert.alert('Error', error.message || 'Failed to upload blog');
     } finally {
       setLoading(false);
     }

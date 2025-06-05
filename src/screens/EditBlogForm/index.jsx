@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator, Alert, Modal } from 'react-native';
 import { ArrowLeft } from 'iconsax-react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { fontType, colors } from '../../theme';
-import axios from 'axios';
+
+// Ganti import axios dan firebaseConfig dengan import firestore
+import firestore from '@react-native-firebase/firestore';
 
 const EditBlogForm = ({ route }) => {
-    // ambil parameter blogId
     const { blogId } = route.params;
 
-    const dataCategory = [
-        { id: 1, name: 'Food' },
-        { id: 2, name: 'Sports' },
-        { id: 3, name: 'Technology' },
-        { id: 4, name: 'Fashion' },
-        { id: 5, name: 'Health' },
-        { id: 6, name: 'Lifestyle' },
-        { id: 7, name: 'Music' },
-        { id: 8, name: 'Car' },
-    ];
+  const dataCategory = [
+    { id: 1, name: 'Populer' },
+    { id: 2, name: 'Terbaru' },
+    { id: 3, name: 'Daerah' },
+    { id: 4, name: 'Kategori' },
+    { id: 5, name: 'Tentang' },
+  ];
 
     const [blogData, setBlogData] = useState({
         title: '',
@@ -28,6 +26,39 @@ const EditBlogForm = ({ route }) => {
         totalComments: 0,
     });
 
+    const [image, setImage] = useState('');
+    const navigation = useNavigation();
+    const [loading, setLoading] = useState(true);
+
+    // Ambil data blog dari Firestore secara realtime
+    useEffect(() => {
+        setLoading(true);
+        const unsubscribe = firestore()
+            .collection('blogs')
+            .doc(blogId)
+            .onSnapshot(docSnap => {
+                if (docSnap.exists) {
+                    const data = docSnap.data();
+                    setBlogData({
+                        title: data.title || '',
+                        content: data.content || '',
+                        category: data.category || {},
+                        totalLikes: data.totalLikes || 0,
+                        totalComments: data.totalComments || 0,
+                    });
+                    setImage(data.image || '');
+                } else {
+                    Alert.alert('Error', 'Blog not found!');
+                    navigation.goBack();
+                }
+                setLoading(false);
+            }, error => {
+                Alert.alert('Error', error.message);
+                setLoading(false);
+            });
+        return () => unsubscribe();
+    }, [blogId, navigation]);
+
     const handleChange = (key, value) => {
         setBlogData({
             ...blogData,
@@ -35,60 +66,24 @@ const EditBlogForm = ({ route }) => {
         });
     };
 
-    const [image, setImage] = useState(null);
-    const navigation = useNavigation();
-
-    // state status apakah sedang loading/tidak
-    const [loading, setLoading] = useState(true);
-
-    // fungsi untuk mengambil data blog berdasarkan id
-    const getBlogById = async () => {
-        setLoading(true);
-        try {
-            // ambil data blog berdasarkan ID dengan metode GET 
-            const response = await axios.get(
-                `https://6841b632d48516d1d35c9c87.mockapi.io/api/blog/${blogId}`,
-            );
-            // atur state blog data menjadi data blog yang di dapatkan 
-            // dari response API
-            setBlogData({
-                title: response.data.title,
-                content: response.data.content,
-                category: {
-                    id: response.data.category.id,
-                    name: response.data.category.name
-                }
-            })
-            // atur data gambar
-            setImage(response.data.image)
-            setLoading(false);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    useEffect(() => {
-        getBlogById();
-    }, [blogId]);
-
+    // Update data blog ke Firestore
     const handleUpdate = async () => {
         setLoading(true);
         try {
-            // update spesifik data blog (ID) menggunakan metode PUT
-            const response = await axios
-                .put(`https://6841b632d48516d1d35c9c87.mockapi.io/api/blog/${blogId}`, {
+            await firestore()
+                .collection('blogs')
+                .doc(blogId)
+                .update({
                     title: blogData.title,
-                    category: blogData.category,
-                    image,
                     content: blogData.content,
-                    totalComments: blogData.totalComments,
+                    category: blogData.category,
+                    image: image,
                     totalLikes: blogData.totalLikes,
+                    totalComments: blogData.totalComments,
                 });
-            if (response.status == 200) {
-                navigation.goBack();
-            }
+            navigation.goBack();
         } catch (e) {
-            Alert.alert('error', `${e.message}`);
+            Alert.alert('Error', e.message);
         } finally {
             setLoading(false);
         }

@@ -1,51 +1,54 @@
 import {ScrollView, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, RefreshControl} from 'react-native';
 import {Edit, Setting2} from 'iconsax-react-native';
-import React, { useState, useCallback} from 'react';
+import React, { useState, useCallback } from 'react';
 import FastImage from '@d11/react-native-fast-image';
 import {ProfileData} from '../../data';
 import {ItemSmall} from '../../components';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {fontType, colors} from '../../theme';
 
-import axios from 'axios';
+// Ganti import axios dan firebaseConfig dengan import firestore
+import firestore from '@react-native-firebase/firestore';
 
 const Profile = () => {
   const navigation = useNavigation();
-  
-  // status untuk menandakan apakah terjadi loading/tidak
+
   const [loading, setLoading] = useState(true);
-  // state blod data untuk menyimpan list (array) dari blog
   const [blogData, setBlogData] = useState([]);
-  // status untuk menyimpan status refreshing
   const [refreshing, setRefreshing] = useState(false);
-  
-  const getDataBlog = async () => {
-    try {
-      // ambil data dari API dengan metode GET
-      const response = await axios.get(
-        'https://6841b632d48516d1d35c9c87.mockapi.io/api/blog',
-      );
-      // atur state blogData sesuai dengan data yang
-      // di dapatkan dari API
-      setBlogData(response.data);
-      // atur loading menjadi false
-      setLoading(false)
-    } catch (error) {
+
+  // Ambil data blog dari Firestore secara realtime
+  const getDataBlog = () => {
+    setLoading(true);
+    const unsubscribe = firestore()
+      .collection('blogs')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot(snapshot => {
+        const blogs = [];
+        snapshot.forEach(doc => {
+          blogs.push({ id: doc.id, ...doc.data() });
+        });
+        setBlogData(blogs);
+        setLoading(false);
+      }, error => {
         console.error(error);
-    }
+        setLoading(false);
+      });
+    return unsubscribe;
   };
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
-      getDataBlog()
+      getDataBlog();
       setRefreshing(false);
     }, 1500);
   }, []);
 
   useFocusEffect(
     useCallback(() => {
-      getDataBlog();
+      const unsubscribe = getDataBlog();
+      return () => unsubscribe && unsubscribe();
     }, [])
   );
 
@@ -83,7 +86,7 @@ const Profile = () => {
           </View>
           <View style={{flexDirection: 'row', gap: 20}}>
             <View style={{alignItems: 'center', gap: 5}}>
-              <Text style={profile.sum}>{ProfileData.blogPosted}</Text>
+              <Text style={profile.sum}>{blogData.length}</Text>
               <Text style={profile.tag}>Posted</Text>
             </View>
             <View style={{alignItems: 'center', gap: 5}}>
@@ -106,7 +109,7 @@ const Profile = () => {
           {loading ? (
             <ActivityIndicator size={'large'} color={colors.blue()} />
           ) : (
-            blogData.map((item, index) => <ItemSmall item={item} key={index} />)
+            blogData.map((item, index) => <ItemSmall item={item} key={item.id || index} />)
           )}
         </View>
       </ScrollView>

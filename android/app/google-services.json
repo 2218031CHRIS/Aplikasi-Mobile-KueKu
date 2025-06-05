@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "487277356705",
+    "project_id": "kuekubaru",
+    "storage_bucket": "kuekubaru.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487277356705:android:1f3ddbef4ce614f6c732e0",
+        "android_client_info": {
+          "package_name": "com.kuekubaru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAab8BQ3iIuZcANhAaAFmIg3jko_6oK9FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
